@@ -27,7 +27,7 @@ public class LowLevel_Shortcuts
     }
 
 
-    public static IEnumerable<model.LowLevel.Declaration> ParseDeclarations(repos.CssParser.StyleClass rule)
+    public static IEnumerable<model.LowLevel.Declaration> ParseDeclarations(model.StyleClass rule)
     {
         return rule.Attributes.Select(pair => new model.LowLevel.Declaration()
         {
