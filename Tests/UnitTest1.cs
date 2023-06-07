@@ -3,6 +3,8 @@ using System.Drawing;
 using System;
 using System.Linq;
 
+using modelStyling = nac.CSSParsing.model.Styling;
+
 namespace Tests;
 
 [TestClass]
@@ -70,7 +72,7 @@ public class UnitTest1
         var style = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule(
             "color:red;font-weight:bold;font-size:12pt;");
 
-        Assert.IsTrue(style.fontColor == Color.Red);
+        Assert.IsTrue(style.fontColor == "Red");
     }
 
 
@@ -85,8 +87,8 @@ public class UnitTest1
                 }
             ");
 
-        Assert.IsTrue(style.First().fontColor == Color.Red);
-        Assert.IsTrue(style.First().fontWeight == FontWeight.bold);
+        Assert.IsTrue(style.First().fontColor == "Red");
+        Assert.IsTrue(style.First().fontWeight == modelStyling.FontWeight.bold);
         Assert.IsTrue(style.First().fontSize == 12);
     }
 
@@ -95,7 +97,7 @@ public class UnitTest1
     public void ColorSimple()
     {
         var s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("color:red");
-        Assert.IsTrue(s.fontColor.Value == Color.Red);
+        Assert.IsTrue(s.fontColor.Value == "Red");
     }
 
 
@@ -103,9 +105,9 @@ public class UnitTest1
     public void BorderSimple()
     {
         var s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("border: 3px solid green");
-        Assert.IsTrue(s.border.Value.Color == System.Drawing.Color.Green);
+        Assert.IsTrue(s.border.Value.Color == "Green");
         Assert.IsTrue(s.border.Value.Width == 3);
-        Assert.IsTrue(s.border.Value.Style == BorderStyle.Solid);
+        Assert.IsTrue(s.border.Value.Style == modelStyling.BorderStyle.Solid);
     }
 
 
@@ -113,7 +115,7 @@ public class UnitTest1
     public void TextDecoration()
     {
         var s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("text-decoration: line-through");
-        Assert.IsTrue(s.textDecoration == FontTextDecoration.lineThrough);
+        Assert.IsTrue(s.textDecoration == modelStyling.FontTextDecoration.lineThrough);
     }
 
 
@@ -130,6 +132,23 @@ public class UnitTest1
         s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("font-family: times new roman");
 
         Assert.IsTrue(string.Equals(s.fontFamily.Value, "Times New Roman", StringComparison.OrdinalIgnoreCase));
+    }
+
+
+
+    [TestMethod]
+    public void SetFromOtherStyle()
+    {
+        var originalStyle = new nac.CSSParsing.model.Styling.Style
+        {
+            fontColor = "Red"
+        };
+        var style1 = new nac.CSSParsing.model.Styling.Style();
+
+        style1.SetUnsetFromOtherStyle(originalStyle);
+
+        Assert.IsTrue(string.Equals("Red", style1.fontColor));
+        Assert.IsTrue(style1.backgroundColor.IsSet == false);
     }
 
 }

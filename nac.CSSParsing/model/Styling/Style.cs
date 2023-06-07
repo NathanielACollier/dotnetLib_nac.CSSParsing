@@ -43,8 +43,8 @@ public class Style
         var optionalProperties = properties.Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(Optional<>));
         foreach (var prop in optionalProperties)
         {
-            dynamic ourValue = prop.GetValue(this);
-            dynamic theirValue = prop.GetValue(_s);
+            Optional<object> ourValue = prop.GetValue(this);
+            Optional<object> theirValue = prop.GetValue(_s);
 
             if (ourValue.IsSet == false && theirValue.IsSet == true)
             {
