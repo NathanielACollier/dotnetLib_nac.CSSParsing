@@ -13,8 +13,8 @@ public class Style
     public Optional<FontTextDecoration> textDecoration { get; set; }
     public Optional<int> fontSize { get; set; }
     public Optional<string> fontFamily { get; set; }
-    public Optional<System.Drawing.Color> fontColor { get; set; }
-    public Optional<System.Drawing.Color> backgroundColor { get; set; }
+    public Optional<string> fontColor { get; set; }
+    public Optional<string> backgroundColor { get; set; }
 
     public Optional<HorizontalAlignment> horizontalAlign { get; set; }
     public Optional<VerticalAlignment> verticalAlign { get; set; }
@@ -27,11 +27,11 @@ public class Style
         this.fontWeight = new Optional<FontWeight>();
         this.fontSize = new Optional<int>();
         this.fontFamily = new Optional<string>();
-        this.fontColor = new Optional<System.Drawing.Color>();
+        this.fontColor = new Optional<string>();
         this.horizontalAlign = new Optional<HorizontalAlignment>();
         this.verticalAlign = new Optional<VerticalAlignment>();
         this.margin = new Optional<Margin>();
-        this.backgroundColor = new Optional<System.Drawing.Color>();
+        this.backgroundColor = new Optional<string>();
         this.border = new Optional<Border>();
         this.textDecoration = new Optional<FontTextDecoration>();
     }

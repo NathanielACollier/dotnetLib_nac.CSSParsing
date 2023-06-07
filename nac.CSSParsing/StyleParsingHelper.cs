@@ -79,10 +79,10 @@ public static class StyleParsingHelper
             switch (decleration.Name.ToLower())
             {
                 case "color":
-                    result.fontColor.Set(parseColor(decleration.Value));
+                    result.fontColor.Set(decleration.Value);
                     break;
                 case "background-color":
-                    result.backgroundColor.Set(parseColor(decleration.Value));
+                    result.backgroundColor.Set(decleration.Value);
                     break;
                 case "text-align":
                     result.horizontalAlign.Set((styleModel.HorizontalAlignment)Enum.Parse(typeof(styleModel.HorizontalAlignment), decleration.Value));
@@ -214,13 +214,8 @@ public static class StyleParsingHelper
         else
         {
             // if it wasn't a border style it has to be a color
-            border.Color = parseColor(term);
+            border.Color = term;
         }
-    }
-
-    private static System.Drawing.Color parseColor(string colorText)
-    {
-        return System.Drawing.ColorTranslator.FromHtml(colorText);
     }
 
     private static styleModel.Border ParseBorder(lowLevelModel.Declaration borderProperty)
