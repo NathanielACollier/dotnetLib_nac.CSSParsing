@@ -72,7 +72,7 @@ public class UnitTest1
         var style = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule(
             "color:red;font-weight:bold;font-size:12pt;");
 
-        Assert.IsTrue(style.fontColor == "Red");
+        Assert.IsTrue(style.fontColor == "red");
     }
 
 
@@ -87,7 +87,7 @@ public class UnitTest1
                 }
             ");
 
-        Assert.IsTrue(style.First().fontColor == "Red");
+        Assert.IsTrue(style.First().fontColor == "red");
         Assert.IsTrue(style.First().fontWeight == modelStyling.FontWeight.bold);
         Assert.IsTrue(style.First().fontSize == 12);
     }
@@ -97,7 +97,7 @@ public class UnitTest1
     public void ColorSimple()
     {
         var s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("color:red");
-        Assert.IsTrue(s.fontColor.Value == "Red");
+        Assert.IsTrue(s.fontColor.Value == "red");
     }
 
 
@@ -105,7 +105,7 @@ public class UnitTest1
     public void BorderSimple()
     {
         var s = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("border: 3px solid green");
-        Assert.IsTrue(s.border.Value.Color == "Green");
+        Assert.IsTrue(s.border.Value.Color == "green");
         Assert.IsTrue(s.border.Value.Width == 3);
         Assert.IsTrue(s.border.Value.Style == modelStyling.BorderStyle.Solid);
     }
