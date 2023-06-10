@@ -147,7 +147,7 @@ public class UnitTest1
 
         style1.SetUnsetFromOtherStyle(originalStyle);
 
-        Assert.IsTrue(string.Equals("Red", style1.fontColor));
+        Assert.IsTrue(style1.fontColor.IsSet && string.Equals("Red", style1.fontColor.Value));
         Assert.IsTrue(style1.backgroundColor.IsSet == false);
     }
 
