@@ -68,6 +68,24 @@ public static class StyleParsingHelper
         }
     }
 
+
+    private static model.Styling.NumberWithUOM ParseNumberWithOptionalUnits(string term)
+    {
+        var m = System.Text.RegularExpressions.Regex.Match(term, "(?<num>\\d+(\\.(\\d+)?)?)(?<unit>.+)?");
+
+        if (!m.Success)
+        {
+            throw new Exception(
+                $"CSS Number value: [{term}] does not match acceptable pattern of number with optional unit");
+        }
+
+        return new model.Styling.NumberWithUOM
+        {
+            Value = Convert.ToDecimal(m.Groups["num"].Value),
+            UOM = m.Groups["unit"].Value
+        };
+    }
+
     private static styleModel.Style ConvertFromCSSToReportStyle(lowLevelModel.StyleClass rule)
     {
         var result = new styleModel.Style();
@@ -111,7 +129,12 @@ public static class StyleParsingHelper
                 case "text-decoration":
                     result.textDecoration.Set(ParseTextDecoration(decleration));
                     break;
-
+                case "height":
+                    result.height.Set(ParseNumberWithOptionalUnits(decleration.Value));
+                    break;
+                case "width":
+                    result.width.Set(ParseNumberWithOptionalUnits(decleration.Value));
+                    break;
             }
         }
 

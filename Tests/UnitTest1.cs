@@ -77,6 +77,23 @@ public class UnitTest1
 
 
     [TestMethod]
+    public void ParseCSSHeightAndWidth()
+    {
+        var style = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("height: 20px; width: 20px;");
+        
+        Assert.IsTrue(style.height.Value.ValueI == 20, "Height not set");
+        Assert.IsTrue(style.width.Value.ValueI == 20, "Width not set");
+
+        style = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("height: 30.567em; width: 7.6453pt;");
+        
+        Assert.IsTrue(style.height.Value.Value == 30.567M, "Height decimal parse failure");
+        Assert.IsTrue(style.width.Value.Value == 7.6453M, "Width decimal parse failure");
+        Assert.IsTrue(style.height.Value.ValueI == 30, "Height decimal int val parse failure");
+        Assert.IsTrue(style.width.Value.ValueI == 7, "Width decimal int val parse failure");
+    }
+
+
+    [TestMethod]
     public void parseCSSBasic()
     {
         var style = nac.CSSParsing.StyleParsingHelper.ParseCSSRuleSet(@"
