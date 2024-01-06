@@ -77,6 +77,16 @@ public class UnitTest1
 
 
     [TestMethod]
+    public void ParseCSSHeightAndWidth()
+    {
+        var style = nac.CSSParsing.StyleParsingHelper.ParseSingleCSSRule("height: 20px; width: 20px;");
+        
+        Assert.IsTrue(style.height.Value.ValueI == 20, "Height not set");
+        Assert.IsTrue(style.width.Value.ValueI == 20, "Width not set");
+    }
+
+
+    [TestMethod]
     public void parseCSSBasic()
     {
         var style = nac.CSSParsing.StyleParsingHelper.ParseCSSRuleSet(@"

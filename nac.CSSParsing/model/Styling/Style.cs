@@ -21,6 +21,9 @@ public class Style
 
     public Optional<Margin> margin { get; set; }
     public Optional<Border> border { get; set; }
+    
+    public Optional<model.Styling.NumberWithUOM> height { get; set; }
+    public Optional<model.Styling.NumberWithUOM> width { get; set; }
 
     public Style()
     {
@@ -34,6 +37,8 @@ public class Style
         this.backgroundColor = new Optional<string>();
         this.border = new Optional<Border>();
         this.textDecoration = new Optional<FontTextDecoration>();
+        this.height = new Optional<NumberWithUOM>();
+        this.width = new Optional<NumberWithUOM>();
     }
 
 
