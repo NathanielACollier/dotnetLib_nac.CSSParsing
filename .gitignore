@@ -365,3 +365,4 @@ FodyWeavers.xsd
 # ignore rider IDE settings
 .idea/
 
+**/*.DS_Store
